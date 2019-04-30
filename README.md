@@ -1,2 +1,5 @@
 # clinical_rest_service
-UIMA based REST service for riding entities in German clinical documents
+
+UIMA based REST service for finding entities in German clinical documents.
+
+Currently mock -> prototype phase
