@@ -5,7 +5,7 @@ public class Entity {
 	int end;
 	String text;
 
-	Entity(String type, int start, int end, String text) {
+	public Entity(String type, int start, int end, String text) {
 		this.type = type;
 		this.start = start;
 		this.end = end;

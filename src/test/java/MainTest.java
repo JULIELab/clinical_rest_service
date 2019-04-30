@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import annotation.Entity;
 import spark.Spark;
 
 public class MainTest {
