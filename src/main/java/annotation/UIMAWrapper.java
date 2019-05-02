@@ -13,12 +13,21 @@ public class UIMAWrapper {
 	
 //	Code for generating a UIMA CAS Pool
 //
-//	final TypeSystemDescription tsDesc = TypeSystemDescriptionFactory.createTypeSystemDescription("de.julielab.jcore.types.jcore-all-types");
-//	final ProcessingResourceMetaData_impl metaData = new ProcessingResourceMetaData_impl();
-//	metaData.setTypeSystem(tsDesc);
 //	try {
-//	    final CasPool casPool = new CasPool(24, metaData);
-//	} catch (ResourceInitializationException e) {
-//	    e.printStackTrace();
+//	    // Create a CasPool.
+//	    String[] typeSystemDescriptorNames;
+//	    try (BufferedReader br = FileUtilities.getReaderFromFile(new File(TrecConfig.UIMA_TYPES_DESCRIPTORNAMES))) {
+//	        typeSystemDescriptorNames = br.lines().filter(Predicate.not(String::isBlank)).map(String::trim).toArray(String[]::new);
+//	    }
+//	    final TypeSystemDescription tsDesc = TypeSystemDescriptionFactory.createTypeSystemDescription(typeSystemDescriptorNames);
+//	    final ProcessingResourceMetaData_impl metaData = new ProcessingResourceMetaData_impl();
+//	    metaData.setTypeSystem(tsDesc);
+//	    try {
+//	        casPool = new CasPool(10, metaData, new ResourceManager_impl());
+//	    } catch (ResourceInitializationException e) {
+//	        log.error("Could not create CAS pool", e);
+//	    }
+//	} catch (IOException e) {
+//	    log.error("The CAS pool could not be created because the file with the UIMA types to load could not be read", e);
 //	}
 }
