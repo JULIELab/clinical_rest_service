@@ -12,13 +12,14 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
-public class UIMAPipelineAndCAS {
+public class UIMAPipelineAndCAS implements IPipelineAndCAS {
 
 	private CAS cas;
 	private AnalysisEngine[] engines;
 	private Class[] classesToAnnotate;
 
-	public void process(String text)
+	@Override
+	public List<Entity> process(String text)
 			throws AnalysisEngineProcessException, CASException {
 		// TODO Auto-generated method stub
 		cas.reset();
@@ -37,5 +38,6 @@ public class UIMAPipelineAndCAS {
 				// StringUtils might help...
 			}
 		}
+		return results;
 	}
 }
