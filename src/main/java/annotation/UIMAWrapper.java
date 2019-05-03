@@ -2,32 +2,54 @@ package annotation;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.CASException;
+import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.util.CasPool;
 
 public class UIMAWrapper {
-	
+
 	//TODO: CAS Pool (see below), read pipeline descriptors, map uima types -> entities
 
-	public List<Entity> annotate(String text){
+	private final int numThreads;
+	private final int timeout;
+	private final ArrayBlockingQueue<UIMAPipelineAndCAS> pipelines;
+
+	public List<Entity> annotate(String text) throws AnalysisEngineProcessException, CASException, InterruptedException {
+		UIMAPipelineAndCAS pipeline = pipelines.take();
+		pipeline.process(text);
+		//		SimplePipeline.runPipeline(cas, engines);
 		return Arrays.asList(new Entity("Hase", 0, 666, "fooo"));
 	}
 	
-//	Code for generating a UIMA CAS Pool
-//
-//	try {
-//	    // Create a CasPool.
-//	    String[] typeSystemDescriptorNames;
-//	    try (BufferedReader br = FileUtilities.getReaderFromFile(new File(TrecConfig.UIMA_TYPES_DESCRIPTORNAMES))) {
-//	        typeSystemDescriptorNames = br.lines().filter(Predicate.not(String::isBlank)).map(String::trim).toArray(String[]::new);
-//	    }
-//	    final TypeSystemDescription tsDesc = TypeSystemDescriptionFactory.createTypeSystemDescription(typeSystemDescriptorNames);
-//	    final ProcessingResourceMetaData_impl metaData = new ProcessingResourceMetaData_impl();
-//	    metaData.setTypeSystem(tsDesc);
-//	    try {
-//	        casPool = new CasPool(10, metaData, new ResourceManager_impl());
-//	    } catch (ResourceInitializationException e) {
-//	        log.error("Could not create CAS pool", e);
-//	    }
-//	} catch (IOException e) {
-//	    log.error("The CAS pool could not be created because the file with the UIMA types to load could not be read", e);
-//	}
+	public String foo() throws InterruptedException{
+		UIMAPipelineAndCAS i = pipelines.take();
+		String s = i.toString();
+		pipelines.put(i);
+		return s;
+	}
+
+	public UIMAWrapper(int numThreads, int timeout) throws IllegalAccessException, InterruptedException {
+		//		AnalysisEngineFactory.createEngine(MyAEImpl.class, myTypeSystem, 
+		//				  paramName1, paramValue1,
+		//				  paramName2, paramValue2,
+		//				  ...);
+		//		
+		this.numThreads = numThreads;
+		this.timeout = timeout;
+		if(numThreads < 1)
+			throw new IllegalAccessException("Need at least 1 Thread");
+		pipelines = new ArrayBlockingQueue<>(numThreads);
+		for(int i = 0; i<numThreads; ++i)
+			pipelines.put(new UIMAPipelineAndCAS());
+	}
+
+
+	public int getNumThreads() {
+		return numThreads;
+	}
 }

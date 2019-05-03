@@ -26,5 +26,10 @@
 			<artifactId>docopt</artifactId>
 			<version>0.6.0.20150202</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimafit-core</artifactId>
+			<version>2.2.0</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -36,7 +36,7 @@ public class Main {
 			try {
 				String text = reEncode(req.body(), charEncoding,
 						DEFAULT_CHARSET);
-				return new Gson().toJson(new UIMAWrapper().annotate(
+				return new Gson().toJson(new UIMAWrapper(10, 100).annotate(
 						reEncode(text, DEFAULT_CHARSET, charEncoding)));
 			} catch (UnsupportedEncodingException e) {
 				res.status(406);
@@ -44,6 +44,7 @@ public class Main {
 				return res;
 			}
 		});
+		//TODO make sure UIMA pipeline is returned when no longer needed
 
 		get("/supported-encodings",
 				(req, res) -> Charset.availableCharsets().keySet());
