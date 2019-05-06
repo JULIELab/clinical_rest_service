@@ -40,11 +40,6 @@ public class UIMAWrapper {
 
 	UIMAWrapper(int timeout, IPipeline... pipelines)
 			throws IllegalAccessException, InterruptedException {
-		//		AnalysisEngineFactory.createEngine(MyAEImpl.class, myTypeSystem, 
-		//				  paramName1, paramValue1,
-		//				  paramName2, paramValue2,
-		//				  ...);
-		//		
 		this.numThreads = pipelines.length;
 		this.timeout = timeout;
 		if (numThreads < 1)
@@ -54,7 +49,7 @@ public class UIMAWrapper {
 			this.pipelines.put(p);
 	}
 	
-	static AnalysisEngine[] createAnalysisEngines() throws ResourceInitializationException{
+	private static AnalysisEngine[] createAnalysisEngines() throws ResourceInitializationException{
 		AnalysisEngine sentenceSplitter = createEngine(SentenceAnnotator.class); //TODO: key-value pairs of additional parameters
 		AnalysisEngine tokenizer = createEngine(TokenAnnotator.class); //TODO: key-value pairs of additional parameters
 		AnalysisEngine posTagger = createEngine(POSAnnotator.class); //TODO: key-value pairs of additional parameters
@@ -63,11 +58,11 @@ public class UIMAWrapper {
 	}
 	
 	@SuppressWarnings("unchecked")
-	static Class<EntityMention>[] getTypesToAnnotate() throws ResourceInitializationException{
+	private static Class<EntityMention>[] getTypesToAnnotate() throws ResourceInitializationException{
 		return new Class[]{de.julielab.jcore.types.Disease.class}; //TODO: other entities to annotate
 	}
 
-	static IPipeline[] makePipelines(int numThreads) throws Exception {
+	private static IPipeline[] makePipelines(int numThreads) throws Exception {
 		if (numThreads < 1)
 			throw new IllegalAccessException("Need at least 1 Thread");
 		IPipeline[] pipelines = new IPipeline[numThreads];
