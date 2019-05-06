@@ -16,10 +16,16 @@ import annotation.Entity;
 
 public class UIMAPipelineAndCAS implements IPipelineAndCAS {
 
-	private CAS cas;
-	private AnalysisEngine[] engines;
-	private Class[] classesToAnnotate;
+	private final CAS cas;
+	private final AnalysisEngine[] engines;
+	private final Class[] classesToAnnotate;
 
+	public UIMAPipelineAndCAS(AnalysisEngine[] engines, Class[] classesToAnnotate) {
+		this.engines = engines;
+		this.classesToAnnotate = classesToAnnotate;
+		this.cas = null; //TODO initialize
+	}
+	
 	@Override
 	public List<Entity> process(String text)
 			throws AnalysisEngineProcessException, CASException {

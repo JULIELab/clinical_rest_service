@@ -19,8 +19,6 @@ public class UIMAWrapper {
 	private final int timeout;
 	private final ArrayBlockingQueue<IPipelineAndCAS> pipelines;
 
-
-
 	public List<Entity> annotate(String text)
 			throws Exception {
 		try (AutoClosingPipeline pipeline = new AutoClosingPipeline(pipelines)) {
@@ -29,19 +27,8 @@ public class UIMAWrapper {
 	}
 
 	public UIMAWrapper(int numThreads, int timeout)
-			throws IllegalAccessException, InterruptedException {
-		//		AnalysisEngineFactory.createEngine(MyAEImpl.class, myTypeSystem, 
-		//				  paramName1, paramValue1,
-		//				  paramName2, paramValue2,
-		//				  ...);
-		//		
-		this.numThreads = numThreads;
-		this.timeout = timeout;
-		if (numThreads < 1)
-			throw new IllegalAccessException("Need at least 1 Thread");
-		pipelines = new ArrayBlockingQueue<>(numThreads);
-		for (int i = 0; i < numThreads; ++i)
-			pipelines.put(new UIMAPipelineAndCAS());
+			throws Exception {
+		this(timeout,makePipelines(numThreads));
 	}
 
 	UIMAWrapper(int timeout, IPipelineAndCAS... pipelines)
@@ -58,6 +45,15 @@ public class UIMAWrapper {
 		this.pipelines = new ArrayBlockingQueue<>(numThreads);
 		for (IPipelineAndCAS p : pipelines)
 			this.pipelines.put(p);
+	}
+	
+	static IPipelineAndCAS[] makePipelines(int numThreads) throws Exception{
+		if (numThreads < 1)
+			throw new IllegalAccessException("Need at least 1 Thread");
+		IPipelineAndCAS[] pipelines = new IPipelineAndCAS[numThreads];
+		for (int i = 0; i < numThreads; ++i)
+			pipelines[i] = new UIMAPipelineAndCAS(null, null); //TODO intilaize properly
+		return pipelines;
 	}
 
 	public int getNumThreads() {
