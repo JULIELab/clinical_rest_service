@@ -9,6 +9,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.junit.Test;
 
+import pipelines.IPipelineAndCAS;
+
 public class UIMAWrapperTest {
 	
 	class DummyPipeline implements IPipelineAndCAS{

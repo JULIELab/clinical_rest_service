@@ -1,4 +1,4 @@
-package annotation;
+package pipelines;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,8 @@ import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+
+import annotation.Entity;
 
 public class UIMAPipelineAndCAS implements IPipelineAndCAS {
 
