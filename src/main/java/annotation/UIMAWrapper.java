@@ -1,12 +1,7 @@
 package annotation;
 
-import java.io.Closeable;
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CASException;
-
 import pipelines.AutoClosingPipeline;
 import pipelines.IPipelineAndCAS;
 import pipelines.UIMAPipelineAndCAS;
@@ -19,16 +14,15 @@ public class UIMAWrapper {
 	private final int timeout;
 	private final ArrayBlockingQueue<IPipelineAndCAS> pipelines;
 
-	public List<Entity> annotate(String text)
-			throws Exception {
-		try (AutoClosingPipeline pipeline = new AutoClosingPipeline(pipelines)) {
+	public List<Entity> annotate(String text) throws Exception {
+		try (AutoClosingPipeline pipeline = new AutoClosingPipeline(
+				pipelines)) {
 			return pipeline.process(text);
 		}
 	}
 
-	public UIMAWrapper(int numThreads, int timeout)
-			throws Exception {
-		this(timeout,makePipelines(numThreads));
+	public UIMAWrapper(int numThreads, int timeout) throws Exception {
+		this(timeout, makePipelines(numThreads));
 	}
 
 	UIMAWrapper(int timeout, IPipelineAndCAS... pipelines)
@@ -46,8 +40,8 @@ public class UIMAWrapper {
 		for (IPipelineAndCAS p : pipelines)
 			this.pipelines.put(p);
 	}
-	
-	static IPipelineAndCAS[] makePipelines(int numThreads) throws Exception{
+
+	static IPipelineAndCAS[] makePipelines(int numThreads) throws Exception {
 		if (numThreads < 1)
 			throw new IllegalAccessException("Need at least 1 Thread");
 		IPipelineAndCAS[] pipelines = new IPipelineAndCAS[numThreads];

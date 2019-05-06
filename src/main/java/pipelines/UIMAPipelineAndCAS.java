@@ -3,7 +3,6 @@ package pipelines;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.uima.UimaContextAdmin;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -22,12 +21,13 @@ public class UIMAPipelineAndCAS implements IPipelineAndCAS {
 	private final AnalysisEngine[] engines;
 	private final Type[] typesToAnnotate;
 
-	public UIMAPipelineAndCAS(AnalysisEngine[] engines, Type[] typesToAnnotate) {
+	public UIMAPipelineAndCAS(AnalysisEngine[] engines,
+			Type[] typesToAnnotate) {
 		this.engines = engines;
 		this.typesToAnnotate = typesToAnnotate;
 		this.cas = null; //TODO initialize
 	}
-	
+
 	@Override
 	public List<Entity> process(String text)
 			throws AnalysisEngineProcessException, CASException {

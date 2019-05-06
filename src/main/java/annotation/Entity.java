@@ -1,4 +1,5 @@
 package annotation;
+
 public class Entity {
 	String type;
 	int start;

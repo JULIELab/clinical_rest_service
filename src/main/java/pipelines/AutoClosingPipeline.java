@@ -13,7 +13,8 @@ public class AutoClosingPipeline implements AutoCloseable, IPipelineAndCAS {
 	private final IPipelineAndCAS pipeline;
 	private final ArrayBlockingQueue<IPipelineAndCAS> pipelines;
 
-	public AutoClosingPipeline(ArrayBlockingQueue<IPipelineAndCAS> pipelines) throws InterruptedException {
+	public AutoClosingPipeline(ArrayBlockingQueue<IPipelineAndCAS> pipelines)
+			throws InterruptedException {
 		this.pipelines = pipelines;
 		this.pipeline = pipelines.take();
 	}

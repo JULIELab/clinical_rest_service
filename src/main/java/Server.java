@@ -12,18 +12,19 @@ import annotation.UIMAWrapper;
 
 public class Server {
 
-	static void start(int port, int maxThreads, int minThreads, int timeOutMillis) {
+	static void start(int port, int maxThreads, int minThreads,
+			int timeOutMillis) {
 		port(port);
 		threadPool(maxThreads, minThreads, timeOutMillis);
 		routing();
 	}
 
-	static void startServer(){
+	static void startServer() {
 		start(Arguments.DEFAULT_PORT, Arguments.DEFAULT_MAX_THREADS,
 				Arguments.DEFAULT_MIN_THREADS, Arguments.DEFAULT_TIMEOUT);
 	}
-	
-	static void startServer(Arguments a){
+
+	static void startServer(Arguments a) {
 		start(a.port, a.maxThreads, a.minThreads, a.timeOutMillis);
 	}
 
@@ -33,8 +34,9 @@ public class Server {
 			try {
 				String text = EncodingUtils.reEncode(req.body(), charEncoding,
 						Main.DEFAULT_CHARSET);
-				return new Gson().toJson(new UIMAWrapper(10, 100).annotate(
-						EncodingUtils.reEncode(text, Main.DEFAULT_CHARSET, charEncoding)));
+				return new Gson().toJson(new UIMAWrapper(10, 100)
+						.annotate(EncodingUtils.reEncode(text,
+								Main.DEFAULT_CHARSET, charEncoding)));
 			} catch (UnsupportedEncodingException e) {
 				res.status(406);
 				res.body("Not Acceptable");

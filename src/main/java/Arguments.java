@@ -10,8 +10,8 @@ public class Arguments {
 
 	static final String DOC_OPT = "JCREST\n\n" + "Usage:\n"
 			+ " JCREST start [--port=<x>] [--timeout=<x>] [--minThreads=<x>] [--maxThreads=<x>]\n"
-			+ " JCREST --help\n\n"
-			+ "Options:\n" + " --help     Show this screen.\n"
+			+ " JCREST --help\n\n" + "Options:\n"
+			+ " --help     Show this screen.\n"
 			+ " --port=<x>    Port to use [default: " + DEFAULT_PORT + "].\n"
 			+ " --timeout=<x>    Timeout in miliseconds [default: "
 			+ DEFAULT_TIMEOUT + "].\n"
@@ -32,9 +32,10 @@ public class Arguments {
 		this.minThreads = minThreads;
 		this.timeOutMillis = timeOutMillis;
 	}
-	
-	Arguments(){
-		this(DEFAULT_PORT, DEFAULT_MAX_THREADS, DEFAULT_MIN_THREADS, DEFAULT_TIMEOUT);
+
+	Arguments() {
+		this(DEFAULT_PORT, DEFAULT_MAX_THREADS, DEFAULT_MIN_THREADS,
+				DEFAULT_TIMEOUT);
 	}
 
 	public static Arguments parseArguments(String[] args) {

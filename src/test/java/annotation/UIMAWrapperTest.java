@@ -12,15 +12,15 @@ import org.junit.Test;
 import pipelines.IPipelineAndCAS;
 
 public class UIMAWrapperTest {
-	
-	class DummyPipeline implements IPipelineAndCAS{
+
+	class DummyPipeline implements IPipelineAndCAS {
 
 		@Override
 		public List<Entity> process(String text)
 				throws AnalysisEngineProcessException, CASException {
 			return Arrays.asList(new Entity("foo", 1, 111, "bar"));
 		}
-		
+
 	}
 
 	@Test
@@ -29,7 +29,5 @@ public class UIMAWrapperTest {
 		List<Entity> actual = uimaWrapper.annotate("does not matter");
 		assertEquals(1, actual.size());
 	}
-	
-	
 
 }
