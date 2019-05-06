@@ -46,18 +46,15 @@ public class UIMAWrapper {
 		for (IPipeline p : pipelines)
 			this.pipelines.put(p);
 	}
-	
-	private static AnalysisEngine[] createAnalysisEngines() throws ResourceInitializationException{
+
+	private static AnalysisEngine[] createAnalysisEngines()
+			throws ResourceInitializationException {
 		AnalysisEngine sentenceSplitter = createEngine(SentenceAnnotator.class); //TODO: key-value pairs of additional parameters
 		AnalysisEngine tokenizer = createEngine(TokenAnnotator.class); //TODO: key-value pairs of additional parameters
 		AnalysisEngine posTagger = createEngine(POSAnnotator.class); //TODO: key-value pairs of additional parameters
 		AnalysisEngine entityTagger = createEngine(EntityAnnotator.class); //TODO: key-value pairs of additional parameters
-		return new AnalysisEngine[]{sentenceSplitter, tokenizer, posTagger, entityTagger};
-	}
-	
-	@SuppressWarnings("unchecked")
-	private static Class<EntityMention>[] getTypesToAnnotate() throws ResourceInitializationException{
-		return new Class[]{de.julielab.jcore.types.Disease.class}; //TODO: other entities to annotate
+		return new AnalysisEngine[] { sentenceSplitter, tokenizer, posTagger,
+				entityTagger };
 	}
 
 	private static IPipeline[] makePipelines(int numThreads) throws Exception {
@@ -65,7 +62,7 @@ public class UIMAWrapper {
 			throw new IllegalAccessException("Need at least 1 Thread");
 		IPipeline[] pipelines = new IPipeline[numThreads];
 		for (int i = 0; i < numThreads; ++i)
-			pipelines[i] = new UIMAPipeline(createAnalysisEngines(), getTypesToAnnotate());
+			pipelines[i] = new UIMAPipeline(createAnalysisEngines());
 		return pipelines;
 	}
 

@@ -10,9 +10,7 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
-import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 
 import annotation.Entity;
 import de.julielab.jcore.types.EntityMention;
@@ -21,12 +19,9 @@ public class UIMAPipeline implements IPipeline {
 
 	private final JCas jcas;
 	private final AnalysisEngine[] engines;
-	private final Class<EntityMention>[] typesToAnnotate;
 
-	public UIMAPipeline(AnalysisEngine[] engines,
-			Class<EntityMention>[] classes) throws UIMAException {
+	public UIMAPipeline(AnalysisEngine[] engines) throws UIMAException {
 		this.engines = engines;
-		this.typesToAnnotate = classes;
 		this.jcas = createJCas();
 	}
 
@@ -38,15 +33,12 @@ public class UIMAPipeline implements IPipeline {
 		jcas.setDocumentText(text);
 		runPipeline(jcas, engines);
 		List<Entity> results = new ArrayList<>();
-		for (Class<EntityMention> t : typesToAnnotate) {
-			AnnotationIndex<EntityMention> index = jcas.getAnnotationIndex(t);
-			for (Annotation a : index) {
-				results.add(new Entity(a.getType().getShortName(), a.getBegin(),
+			for (EntityMention a : jcas.getAnnotationIndex(EntityMention.class)) {
+				results.add(new Entity(a.getSpecificType(), a.getBegin(),
 						a.getEnd(), a.getCoveredText()));
 				//TODO offsets would need to be fixed if different encodings are really required 🤷
 				// StringUtils might help...
 			}
-		}
 		return results;
 	}
 }
