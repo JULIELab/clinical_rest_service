@@ -21,10 +21,8 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
 public class UIMAWrapper {
 
-	//TODO: CAS Pool (see below), read pipeline descriptors, map uima types -> entities
-
 	private final int numThreads;
-	private final int timeout;
+	private final int timeout; //TODO: honor!
 	private final ArrayBlockingQueue<IPipeline> pipelines;
 
 	public List<Entity> annotate(String text) throws Exception {
