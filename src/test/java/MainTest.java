@@ -16,7 +16,7 @@ public class MainTest {
 
 	@BeforeClass
 	public static void beforeClass() throws Exception {
-		new Main().routing();
+		Server.startServer();
 		httpClient.start();
 	}
 
