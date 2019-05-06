@@ -3,10 +3,12 @@ package pipelines;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.uima.UimaContextAdmin;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
+import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
@@ -18,11 +20,11 @@ public class UIMAPipelineAndCAS implements IPipelineAndCAS {
 
 	private final CAS cas;
 	private final AnalysisEngine[] engines;
-	private final Class[] classesToAnnotate;
+	private final Type[] typesToAnnotate;
 
-	public UIMAPipelineAndCAS(AnalysisEngine[] engines, Class[] classesToAnnotate) {
+	public UIMAPipelineAndCAS(AnalysisEngine[] engines, Type[] typesToAnnotate) {
 		this.engines = engines;
-		this.classesToAnnotate = classesToAnnotate;
+		this.typesToAnnotate = typesToAnnotate;
 		this.cas = null; //TODO initialize
 	}
 	
@@ -35,12 +37,10 @@ public class UIMAPipelineAndCAS implements IPipelineAndCAS {
 		SimplePipeline.runPipeline(cas, engines);
 		JCas jcas = cas.getJCas();
 		List<Entity> results = new ArrayList<>();
-		for (Class c : classesToAnnotate) {
-			AnnotationIndex<Annotation> index = jcas.getAnnotationIndex(c);
+		for (Type t : typesToAnnotate) {
+			AnnotationIndex<Annotation> index = jcas.getAnnotationIndex(t);
 			for (Annotation a : index) {
-				;;
-
-				results.add(new Entity(a.getType().toString(), a.getBegin(),
+				results.add(new Entity(t.getShortName(), a.getBegin(),
 						a.getEnd(), a.getCoveredText()));
 				//TODO offsets would need to be fixed if different encodings are really required 🤷
 				// StringUtils might help...
