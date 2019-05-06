@@ -9,11 +9,11 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.junit.Test;
 
-import pipelines.IPipelineAndCAS;
+import pipelines.IPipeline;
 
 public class UIMAWrapperTest {
 
-	class DummyPipeline implements IPipelineAndCAS {
+	class DummyPipeline implements IPipeline {
 
 		@Override
 		public List<Entity> process(String text)

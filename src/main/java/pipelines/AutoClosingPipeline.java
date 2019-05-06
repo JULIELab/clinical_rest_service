@@ -8,12 +8,12 @@ import org.apache.uima.cas.CASException;
 
 import annotation.Entity;
 
-public class AutoClosingPipeline implements AutoCloseable, IPipelineAndCAS {
+public class AutoClosingPipeline implements AutoCloseable, IPipeline {
 
-	private final IPipelineAndCAS pipeline;
-	private final ArrayBlockingQueue<IPipelineAndCAS> pipelines;
+	private final IPipeline pipeline;
+	private final ArrayBlockingQueue<IPipeline> pipelines;
 
-	public AutoClosingPipeline(ArrayBlockingQueue<IPipelineAndCAS> pipelines)
+	public AutoClosingPipeline(ArrayBlockingQueue<IPipeline> pipelines)
 			throws InterruptedException {
 		this.pipelines = pipelines;
 		this.pipeline = pipelines.take();

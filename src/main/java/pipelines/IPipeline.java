@@ -7,7 +7,7 @@ import org.apache.uima.cas.CASException;
 
 import annotation.Entity;
 
-public interface IPipelineAndCAS {
+public interface IPipeline {
 	public List<Entity> process(String text)
 			throws AnalysisEngineProcessException, CASException;
 }
