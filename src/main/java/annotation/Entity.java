@@ -1,10 +1,10 @@
 package annotation;
 
 public class Entity {
-	String type;
-	int start;
-	int end;
-	String text;
+	public String type;
+	public int start;
+	public int end;
+	public String text;
 
 	public Entity(String type, int start, int end, String text) {
 		this.type = type;
