@@ -33,7 +33,7 @@ public class UIMAWrapperTest {
 	
 	@Test
 	public void testCreatePipelines() throws Exception {
-		AnalysisEngine[] aes = UIMAWrapper.createAnalysisEngines();
+		AnalysisEngine[] aes = UIMAWrapper.createAnalysisEngines(new AnalysisEngineConfiguration());
 		assertEquals(4, aes.length);
 	}
 
