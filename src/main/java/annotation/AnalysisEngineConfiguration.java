@@ -3,13 +3,13 @@ package annotation;
 import de.julielab.jcore.ae.jsbd.main.SentenceAnnotator;
 import de.julielab.jcore.ae.jtbd.main.TokenAnnotator;
 
-class AnalysisEngineConfiguration {
+public class AnalysisEngineConfiguration {
 	private static final Object[] ENTITY_TAGGER_PARAMS = new Object[] {
 			"EntityTypes",
 			new String[] { "gene-protein=de.julielab.jcore.types.EntityMention",
 					"gene-generic=de.julielab.jcore.types.EntityMention",
 					"gene-rna=de.julielab.jcore.types.EntityMention" }, 
-			"ExpandAbbreviations", "false", "ConsistencyPreservation", "",
+			"ExpandAbbreviations", false, "ConsistencyPreservation", null,
 			"ModelFilename", "src/main/resources/models/jnet-pennbio.gz" //TODO get real name
 	};
 
@@ -17,6 +17,12 @@ class AnalysisEngineConfiguration {
 			"de.julielab.jcore.types.STTSMedPOSTag", "ModelFilename",
 			"src/main/resources/models/jpos-framed.gz" };
 
+	public final boolean usePOS;
+	
+	public AnalysisEngineConfiguration(boolean usePOS) {
+		this.usePOS = usePOS;
+	}
+	
 	/**
 	 * @return the entityTaggerParams
 	 */

@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.junit.Test;
@@ -31,10 +30,18 @@ public class UIMAWrapperTest {
 		assertEquals(1, actual.size());
 	}
 	
+//	@Test
+//	public void testCreatePipelines() throws Exception {
+//		AnalysisEngine[] aes = UIMAWrapper.createAnalysisEngines(new AnalysisEngineConfiguration());
+//		assertEquals(4, aes.length);
+//	}
+	
 	@Test
-	public void testCreatePipelines() throws Exception {
-		AnalysisEngine[] aes = UIMAWrapper.createAnalysisEngines(new AnalysisEngineConfiguration());
-		assertEquals(4, aes.length);
+	public void testAnnotate() throws Exception {
+		UIMAWrapper wrapper = new UIMAWrapper(1,1, new AnalysisEngineConfiguration(false));
+		List<Entity> entities = wrapper.annotate("IL2 and igf oder mouse cancer");
+		assertEquals(1, entities.size());
+		assertEquals(new Entity("gene-protein", 0, 3, "IL2"), entities.get(0));
 	}
 
 }

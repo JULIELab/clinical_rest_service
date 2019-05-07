@@ -2,6 +2,7 @@ package annotation;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -21,26 +22,28 @@ public class UIMAWrapper {
 	static AnalysisEngine[] createAnalysisEngines(
 			final AnalysisEngineConfiguration config)
 			throws ResourceInitializationException {
-		final AnalysisEngine sentenceSplitter = createEngine(
-				SentenceAnnotator.class, config.getSentenceSplitterConfig()); //TODO: model name
-		final AnalysisEngine tokenizer = createEngine(TokenAnnotator.class,
-				config.getTokenizerConfig()); //TODO: model name
-		final AnalysisEngine posTagger = createEngine(POSAnnotator.class,
-				config.getPosTaggerParams());
-		final AnalysisEngine entityTagger = createEngine(EntityAnnotator.class,
-				config.getEntityTaggerParams());
-		return new AnalysisEngine[] { sentenceSplitter, tokenizer, posTagger,
-				entityTagger };
+		ArrayList<AnalysisEngine> aes = new ArrayList<>(4);
+		aes.add(createEngine(SentenceAnnotator.class,
+				config.getSentenceSplitterConfig()));
+		aes.add(createEngine(TokenAnnotator.class,
+				config.getTokenizerConfig()));
+		if (config.usePOS)
+			aes.add(createEngine(POSAnnotator.class,
+					config.getPosTaggerParams()));
+		aes.add(createEngine(EntityAnnotator.class,
+				config.getEntityTaggerParams()));
+		return aes.toArray(new AnalysisEngine[aes.size()]);
 	}
 
-	private static IPipeline[] makePipelines(final int numThreads)
+	private static IPipeline[] makePipelines(final int numThreads,
+			final AnalysisEngineConfiguration analysisEngineConfiguration)
 			throws Exception {
 		if (numThreads < 1)
 			throw new IllegalAccessException("Need at least 1 Thread");
 		final IPipeline[] pipelines = new IPipeline[numThreads];
 		for (int i = 0; i < numThreads; ++i)
 			pipelines[i] = new UIMAPipeline(
-					createAnalysisEngines(new AnalysisEngineConfiguration()));
+					createAnalysisEngines(analysisEngineConfiguration));
 		return pipelines;
 	}
 
@@ -50,9 +53,10 @@ public class UIMAWrapper {
 
 	private final ArrayBlockingQueue<IPipeline> pipelines;
 
-	public UIMAWrapper(final int numThreads, final int timeout)
+	public UIMAWrapper(final int numThreads, final int timeout,
+			final AnalysisEngineConfiguration analysisEngineConfiguration)
 			throws Exception {
-		this(timeout, makePipelines(numThreads));
+		this(timeout, makePipelines(numThreads, analysisEngineConfiguration));
 	}
 
 	UIMAWrapper(final int timeout, final IPipeline... pipelines)

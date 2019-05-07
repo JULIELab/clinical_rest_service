@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 
 import com.google.gson.Gson;
 
+import annotation.AnalysisEngineConfiguration;
 import annotation.UIMAWrapper;
 
 public class Server {
@@ -34,7 +35,7 @@ public class Server {
 			try {
 				String text = EncodingUtils.reEncode(req.body(), charEncoding,
 						Main.DEFAULT_CHARSET);
-				return new Gson().toJson(new UIMAWrapper(10, 100)
+				return new Gson().toJson(new UIMAWrapper(10, 100, new AnalysisEngineConfiguration(false))
 						.annotate(EncodingUtils.reEncode(text,
 								Main.DEFAULT_CHARSET, charEncoding)));
 			} catch (UnsupportedEncodingException e) {
