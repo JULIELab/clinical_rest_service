@@ -55,7 +55,7 @@ public class UIMAWrapper {
 			this.pipelines.put(p);
 	}
 
-	private static AnalysisEngine[] createAnalysisEngines()
+	static AnalysisEngine[] createAnalysisEngines()
 			throws ResourceInitializationException {
 		AnalysisEngine sentenceSplitter = createEngine(SentenceAnnotator.class,
 				SentenceAnnotator.PARAM_MODEL_FILE, "todo"); //TODO: model name
