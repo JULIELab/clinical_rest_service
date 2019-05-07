@@ -1,14 +1,20 @@
 import static org.junit.Assert.*;
 import java.nio.file.Paths;
+import java.util.List;
+
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.client.api.Request;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.google.gson.Gson;
+
+import annotation.Entity;
 import spark.Spark;
 
-public class MainTest {
+public class ServerTest {
 	private static final String TEST_INPUT = "src/test/resources/test.json";
 	private static final String BASE_URL = "http://localhost:4567";
 	private static final String ENTITY_URL = BASE_URL + "/entities";
@@ -26,18 +32,18 @@ public class MainTest {
 		httpClient.stop();
 	}
 
-	//	@Test
-	//	public void test() throws Exception {
-	//		Request request = httpClient.POST(ENTITY_URL);
-	//		request.file(Paths.get(TEST_INPUT));
-	//		ContentResponse response = request.send();
-	//		String responseString = response.getContentAsString();
-	//		Entity[] expectedEntities = new Entity[] {
-	//				new Entity("Hase", 0, 666, "fooo") };
-	//		Entity[] actualEntities = new Gson().fromJson(responseString,
-	//				Entity[].class);
-	//		assertArrayEquals(expectedEntities, actualEntities);
-	//	}
+	@Test
+	public void testWholeServer() throws Exception {
+		Request request = httpClient.POST(ENTITY_URL);
+		request.file(Paths.get(TEST_INPUT));
+		ContentResponse response = request.send();
+		String responseString = response.getContentAsString();
+		Entity[] expectedEntities = new Entity[] {
+				new Entity("gene-protein", 0, 3, "IL2") };
+		Entity[] actualEntities = new Gson().fromJson(responseString,
+				Entity[].class);
+		assertArrayEquals(expectedEntities, actualEntities);
+	}
 
 	@Test
 	public void testBadEncodingResponse() throws Exception {
