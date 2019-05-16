@@ -1,6 +1,5 @@
 import static org.junit.Assert.*;
 import java.nio.file.Paths;
-import java.util.List;
 
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
