@@ -1,3 +1,4 @@
+package de.julielab.restservice;
 import static org.junit.Assert.*;
 import java.nio.file.Paths;
 
@@ -10,7 +11,9 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
-import annotation.Entity;
+import de.julielab.restservice.Main;
+import de.julielab.restservice.Server;
+import de.julielab.restservice.annotation.Entity;
 import spark.Spark;
 
 public class ServerTest {

@@ -1,4 +1,4 @@
-package pipelines;
+package de.julielab.restservice.pipelines;
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -6,7 +6,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 
-import annotation.Entity;
+import de.julielab.restservice.annotation.Entity;
 
 public class AutoClosingPipeline implements AutoCloseable, IPipeline {
 

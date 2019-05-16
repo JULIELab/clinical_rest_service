@@ -1,8 +1,9 @@
+package de.julielab.restservice;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import annotation.Entity;
+import de.julielab.restservice.annotation.Entity;
 
 public class EncodingUtils {
 

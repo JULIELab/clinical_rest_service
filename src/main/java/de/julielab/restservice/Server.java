@@ -1,3 +1,4 @@
+package de.julielab.restservice;
 import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
@@ -8,8 +9,8 @@ import java.nio.charset.Charset;
 
 import com.google.gson.Gson;
 
-import annotation.AnalysisEngineConfiguration;
-import annotation.UIMAWrapper;
+import de.julielab.restservice.annotation.AnalysisEngineConfiguration;
+import de.julielab.restservice.annotation.UIMAWrapper;
 
 public class Server {
 

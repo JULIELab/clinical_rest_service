@@ -1,3 +1,4 @@
+package de.julielab.restservice;
 import static org.junit.Assert.*;
 
 import java.io.UnsupportedEncodingException;
@@ -6,7 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import annotation.Entity;
+import de.julielab.restservice.EncodingUtils;
+import de.julielab.restservice.annotation.Entity;
 
 public class EncodingUtilsTest {
 	

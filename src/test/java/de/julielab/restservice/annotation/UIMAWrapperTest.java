@@ -1,4 +1,4 @@
-package annotation;
+package de.julielab.restservice.annotation;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,10 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.junit.Test;
 
-import pipelines.IPipeline;
+import de.julielab.restservice.annotation.AnalysisEngineConfiguration;
+import de.julielab.restservice.annotation.Entity;
+import de.julielab.restservice.annotation.UIMAWrapper;
+import de.julielab.restservice.pipelines.IPipeline;
 
 public class UIMAWrapperTest {
 

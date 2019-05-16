@@ -1,4 +1,4 @@
-package annotation;
+package de.julielab.restservice.annotation;
 
 public class Entity {
 	public String type;

@@ -1,4 +1,4 @@
-package annotation;
+package de.julielab.restservice.annotation;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
@@ -13,9 +13,9 @@ import de.julielab.jcore.ae.jnet.uima.EntityAnnotator;
 import de.julielab.jcore.ae.jpos.postagger.POSAnnotator;
 import de.julielab.jcore.ae.jsbd.main.SentenceAnnotator;
 import de.julielab.jcore.ae.jtbd.main.TokenAnnotator;
-import pipelines.AutoClosingPipeline;
-import pipelines.IPipeline;
-import pipelines.UIMAPipeline;
+import de.julielab.restservice.pipelines.AutoClosingPipeline;
+import de.julielab.restservice.pipelines.IPipeline;
+import de.julielab.restservice.pipelines.UIMAPipeline;
 
 public class UIMAWrapper {
 

@@ -1,3 +1,4 @@
+package de.julielab.restservice;
 import java.util.Map;
 import org.docopt.Docopt;
 
