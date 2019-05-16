@@ -9,7 +9,7 @@ public class EncodingUtils {
 
 	private static final String UTF8 = StandardCharsets.UTF_8.name();
 
-	static String reEncode(String text, String fromEncoding, String toEncoding)
+	public static String reEncode(String text, String fromEncoding, String toEncoding)
 			throws UnsupportedEncodingException {
 		if (fromEncoding == null || toEncoding == null
 				|| (fromEncoding.equals(toEncoding)))
@@ -23,8 +23,10 @@ public class EncodingUtils {
 		if (fromEncoding == null || toEncoding == null
 				|| (fromEncoding.equals(toEncoding))) {
 			if (textInUTF8 && !fromEncoding.equals(UTF8))
-				for (Entity e : entities)
+				for (Entity e : entities) {
+					e.type = reEncode(e.type, fromEncoding, UTF8);
 					e.text = reEncode(e.text, fromEncoding, UTF8);
+				}
 		} else {
 			for (Entity e : entities) {
 				if (e.start != 0) {
@@ -37,6 +39,7 @@ public class EncodingUtils {
 				e.end = s.length();
 				e.text = textInUTF8 ? reEncode(e.text, fromEncoding, UTF8)
 						: reEncode(e.text, fromEncoding, toEncoding);
+				e.type = textInUTF8 ? reEncode(e.type, fromEncoding, UTF8) : reEncode(e.type, fromEncoding, toEncoding);
 			}
 		}
 	}

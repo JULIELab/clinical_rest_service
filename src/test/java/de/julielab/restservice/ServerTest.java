@@ -17,7 +17,7 @@ import de.julielab.restservice.annotation.Entity;
 import spark.Spark;
 
 public class ServerTest {
-	private static final String TEST_INPUT = "src/test/resources/test.json";
+	private static final String TEST_INPUT = "src/test/resources/test.txt";
 	private static final String BASE_URL = "http://localhost:4567";
 	private static final String ENTITY_URL = BASE_URL + "/entities";
 	static HttpClient httpClient = new HttpClient();

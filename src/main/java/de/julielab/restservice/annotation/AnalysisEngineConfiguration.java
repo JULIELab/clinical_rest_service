@@ -46,5 +46,9 @@ public class AnalysisEngineConfiguration {
 		return new Object[] { TokenAnnotator.PARAM_MODEL,
 				"src/main/resources/models/jtbd-framed.gz" };
 	}
+	
+	public String getInternalEncoding() {
+		return "utf-8";
+	}
 
 }

@@ -3,9 +3,6 @@ package de.julielab.restservice.pipelines;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CASException;
-
 import de.julielab.restservice.annotation.Entity;
 
 public class AutoClosingPipeline implements AutoCloseable, IPipeline {
@@ -25,9 +22,9 @@ public class AutoClosingPipeline implements AutoCloseable, IPipeline {
 	}
 
 	@Override
-	public List<Entity> process(String text)
-			throws AnalysisEngineProcessException, CASException {
-		return pipeline.process(text);
+	public List<Entity> process(String text, String fromEncoding)
+			throws Exception {
+		return pipeline.process(text, fromEncoding);
 	}
 
 }

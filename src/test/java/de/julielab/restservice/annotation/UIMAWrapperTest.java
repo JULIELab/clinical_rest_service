@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CASException;
 import org.junit.Test;
 
 import de.julielab.restservice.annotation.AnalysisEngineConfiguration;
@@ -19,8 +17,8 @@ public class UIMAWrapperTest {
 	class DummyPipeline implements IPipeline {
 
 		@Override
-		public List<Entity> process(String text)
-				throws AnalysisEngineProcessException, CASException {
+		public List<Entity> process(String text, String fromEncoding)
+				throws Exception {
 			return Arrays.asList(new Entity("foo", 1, 111, "bar"));
 		}
 
@@ -29,7 +27,7 @@ public class UIMAWrapperTest {
 	@Test
 	public void testAnnotateWithDummy() throws Exception {
 		UIMAWrapper uimaWrapper = new UIMAWrapper(100, new DummyPipeline());
-		List<Entity> actual = uimaWrapper.annotate("does not matter");
+		List<Entity> actual = uimaWrapper.annotate("does not matter", "utf-8");
 		assertEquals(1, actual.size());
 	}
 	
@@ -42,7 +40,7 @@ public class UIMAWrapperTest {
 	@Test
 	public void testAnnotate() throws Exception {
 		UIMAWrapper wrapper = new UIMAWrapper(1,1, new AnalysisEngineConfiguration(false));
-		List<Entity> entities = wrapper.annotate("IL2 and igf oder mouse cancer");
+		List<Entity> entities = wrapper.annotate("IL2 and igf oder mouse cancer", "utf-8");
 		assertEquals(1, entities.size());
 		assertEquals(new Entity("gene-protein", 0, 3, "IL2"), entities.get(0));
 	}
