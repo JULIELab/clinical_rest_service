@@ -14,29 +14,26 @@ import de.julielab.restservice.annotation.UIMAWrapper;
 
 public class Server {
 
-	static void start(int port, int maxThreads, int minThreads,
-			int timeOutMillis) {
+	static void start(int port, String modelFolder) {
 		port(port);
-		threadPool(maxThreads, minThreads, timeOutMillis);
-		routing();
+		routing(modelFolder);
 	}
 
 	static void startServer() {
-		start(Arguments.DEFAULT_PORT, Arguments.DEFAULT_MAX_THREADS,
-				Arguments.DEFAULT_MIN_THREADS, Arguments.DEFAULT_TIMEOUT);
+		start(Arguments.DEFAULT_PORT, Arguments.DEFAULT_MODEL_FOLDER);
 	}
 
 	static void startServer(Arguments a) {
-		start(a.port, a.maxThreads, a.minThreads, a.timeOutMillis);
+		start(a.port, a.modelFolder);
 	}
 
-	private static void routing() {
+	private static void routing(String modelFolder) {
 		post("/entities", (req, res) -> {
 			String charEncoding = req.headers(Main.HEADER_CHAR_SET);
 			try {
 				String text = EncodingUtils.reEncode(req.body(), charEncoding,
 						Main.DEFAULT_CHARSET);
-				return new Gson().toJson(new UIMAWrapper(10, 100, new AnalysisEngineConfiguration(false))
+				return new Gson().toJson(new UIMAWrapper(10, 100, new AnalysisEngineConfiguration(false, modelFolder))
 						.annotate(text, charEncoding));
 			} catch (UnsupportedEncodingException e) {
 				res.status(406);

@@ -11,6 +11,7 @@ import de.julielab.restservice.annotation.AnalysisEngineConfiguration;
 import de.julielab.restservice.annotation.Entity;
 import de.julielab.restservice.annotation.UIMAWrapper;
 import de.julielab.restservice.pipelines.IPipeline;
+import de.julielab.restservice.Arguments;
 
 public class UIMAWrapperTest {
 
@@ -39,7 +40,7 @@ public class UIMAWrapperTest {
 	
 	@Test
 	public void testAnnotate() throws Exception {
-		UIMAWrapper wrapper = new UIMAWrapper(1,1, new AnalysisEngineConfiguration(false));
+		UIMAWrapper wrapper = new UIMAWrapper(1,1, new AnalysisEngineConfiguration(false,Arguments.DEFAULT_MODEL_FOLDER));
 		List<Entity> entities = wrapper.annotate("IL2 and igf oder mouse cancer", "utf-8");
 		assertEquals(1, entities.size());
 		assertEquals(new Entity("gene-protein", 0, 3, "IL2"), entities.get(0));
