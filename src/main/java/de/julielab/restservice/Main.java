@@ -4,6 +4,6 @@ public class Main {
 	static final String HEADER_CHAR_SET = "Accept-Charset";
 
 	public static void main(String[] args) {
-		Server.startServer();
+		Server.startServer(Arguments.parseArguments(args));
 	}
 }
