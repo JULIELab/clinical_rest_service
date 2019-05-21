@@ -33,7 +33,7 @@ public class Server {
 			try {
 				String text = EncodingUtils.reEncode(req.body(), charEncoding,
 						Main.DEFAULT_CHARSET);
-				return new Gson().toJson(new UIMAWrapper(10, 100, new AnalysisEngineConfiguration(false, modelFolder))
+				return new Gson().toJson(new UIMAWrapper(1, 100, new AnalysisEngineConfiguration(false, modelFolder))
 						.annotate(text, charEncoding));
 			} catch (UnsupportedEncodingException e) {
 				res.status(406);

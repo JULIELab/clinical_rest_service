@@ -3,15 +3,11 @@ package de.julielab.restservice.pipelines;
 import static org.apache.uima.fit.factory.JCasFactory.createJCas;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CASException;
-import org.apache.uima.cas.CASRuntimeException;
 import org.apache.uima.jcas.JCas;
 
 import de.julielab.restservice.annotation.Entity;

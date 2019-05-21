@@ -41,7 +41,8 @@ public class ServerTest {
 		ContentResponse response = request.send();
 		String responseString = response.getContentAsString();
 		Entity[] expectedEntities = new Entity[] {
-				new Entity("gene-protein", 0, 3, "IL2") };
+				new Entity("gene-protein", 0, 3, "IL2"),
+				new Entity("gene-protein", 31, 34, "IL2") };
 		Entity[] actualEntities = new Gson().fromJson(responseString,
 				Entity[].class);
 		assertArrayEquals(expectedEntities, actualEntities);
