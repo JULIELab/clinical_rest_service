@@ -16,6 +16,5 @@ UIMA based REST service for finding entities in German clinical documents.
 
 ## Java packages
 * *restservice* contains classes for starting/running REST server + *EncodingUtils* for encoding conversion
-* *annotation* contains UIMA wrapping and configuration classes/packages
-* *annotation.configuration* contains classes for describing the components used in a UIMA pipeline
+* *annotation* contains classes configuring / wrapping a UIMA pipeline
 * *annotation.pipelines* contains wrappers for UIMA pipelines as a preparation for possible multi-threading

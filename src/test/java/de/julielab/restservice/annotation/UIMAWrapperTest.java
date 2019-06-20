@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.julielab.restservice.ServerTest;
-import de.julielab.restservice.annotation.configuration.AnalysisEngineConfiguration;
 import de.julielab.restservice.annotation.pipelines.IPipeline;
 
 public class UIMAWrapperTest {
@@ -26,7 +24,9 @@ public class UIMAWrapperTest {
 	@Test
 	public void testAnnotate() throws Exception {
 		final UIMAWrapper wrapper = new UIMAWrapper(1, 1,
-				new AnalysisEngineConfiguration(false, ServerTest.TEST_MODELS));
+				AnalysisEngineConfiguration.readConfiguration(
+						"src/test/resources/uima.config.json"));
+
 		final List<Entity> entities = wrapper
 				.annotate("IL2 and igf oder mouse cancer", "utf-8");
 		assertEquals(1, entities.size());

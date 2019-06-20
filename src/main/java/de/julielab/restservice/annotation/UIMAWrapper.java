@@ -13,7 +13,6 @@ import de.julielab.jcore.ae.jnet.uima.EntityAnnotator;
 import de.julielab.jcore.ae.jpos.postagger.POSAnnotator;
 import de.julielab.jcore.ae.jsbd.main.SentenceAnnotator;
 import de.julielab.jcore.ae.jtbd.main.TokenAnnotator;
-import de.julielab.restservice.annotation.configuration.AnalysisEngineConfiguration;
 import de.julielab.restservice.annotation.pipelines.AutoClosingPipeline;
 import de.julielab.restservice.annotation.pipelines.IPipeline;
 import de.julielab.restservice.annotation.pipelines.UIMAPipeline;

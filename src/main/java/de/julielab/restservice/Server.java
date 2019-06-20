@@ -9,8 +9,8 @@ import java.nio.charset.Charset;
 
 import com.google.gson.Gson;
 
+import de.julielab.restservice.annotation.AnalysisEngineConfiguration;
 import de.julielab.restservice.annotation.UIMAWrapper;
-import de.julielab.restservice.annotation.configuration.AnalysisEngineConfiguration;
 
 public class Server {
 
@@ -35,14 +35,15 @@ public class Server {
 	}
 
 	static void startServer(final Arguments a) throws Exception {
-		startServer(a.port, a.modelFolder);
+		startServer(a.port, a.configurationFile);
 	}
 
-	static void startServer(final int port, final String modelFolder)
+	static void startServer(final int port, final String configurationFile)
 			throws Exception {
 		port(port);
 		final UIMAWrapper uima = new UIMAWrapper(1, 100,
-				new AnalysisEngineConfiguration(false, modelFolder));
+				AnalysisEngineConfiguration
+						.readConfiguration(configurationFile));
 		routing(uima);
 	}
 }

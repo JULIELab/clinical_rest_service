@@ -20,7 +20,7 @@ import de.julielab.restservice.annotation.Entity;
 import spark.Spark;
 
 public class ServerTest {
-	public static final String TEST_MODELS = "src/test/resources/models";
+	public static final String TEST_CONFIG = "src/test/resources/uima.config.json";
 	private static final String TEST_INPUT = "src/test/resources/test.txt";
 	private static final int TEST_PORT = 4567;
 	private static final String BASE_URL = "http://localhost:" + TEST_PORT;
@@ -35,7 +35,7 @@ public class ServerTest {
 
 	@BeforeClass
 	public static void beforeClass() throws Exception {
-		Server.startServer(TEST_PORT, TEST_MODELS);
+		Server.startServer(TEST_PORT, TEST_CONFIG);
 		httpClient.start();
 	}
 
