@@ -1,4 +1,4 @@
-package de.julielab.restservice.pipelines;
+package de.julielab.restservice.annotation.pipelines;
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;

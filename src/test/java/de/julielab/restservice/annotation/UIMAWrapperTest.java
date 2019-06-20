@@ -8,7 +8,8 @@ import java.util.List;
 import org.junit.Test;
 
 import de.julielab.restservice.ServerTest;
-import de.julielab.restservice.pipelines.IPipeline;
+import de.julielab.restservice.annotation.configuration.AnalysisEngineConfiguration;
+import de.julielab.restservice.annotation.pipelines.IPipeline;
 
 public class UIMAWrapperTest {
 

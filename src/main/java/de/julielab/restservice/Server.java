@@ -9,8 +9,8 @@ import java.nio.charset.Charset;
 
 import com.google.gson.Gson;
 
-import de.julielab.restservice.annotation.AnalysisEngineConfiguration;
 import de.julielab.restservice.annotation.UIMAWrapper;
+import de.julielab.restservice.annotation.configuration.AnalysisEngineConfiguration;
 
 public class Server {
 

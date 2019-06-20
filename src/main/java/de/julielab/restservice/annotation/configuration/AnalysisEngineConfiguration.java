@@ -1,4 +1,4 @@
-package de.julielab.restservice.annotation;
+package de.julielab.restservice.annotation.configuration;
 
 import de.julielab.jcore.ae.jsbd.main.SentenceAnnotator;
 import de.julielab.jcore.ae.jtbd.main.TokenAnnotator;

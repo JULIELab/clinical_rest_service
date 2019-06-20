@@ -15,6 +15,7 @@ UIMA based REST service for finding entities in German clinical documents.
 * Only external dependency are model files, no need for database etc.
 
 ## Java packages
-* *restservice* package contains classes for starting/running REST server + *EncodingUtils* for encoding conversion
-* *annotation* package contains UIMA wrapping and configuration classes; *AnalysisEngineConfiguration* could be extended to read a JSON (or whatever) file if different pipeline versions are to be deployed
-* *pipelines* package contains wrappers for UIMA pipelines as a preparation for possible multi-threading
+* *restservice* contains classes for starting/running REST server + *EncodingUtils* for encoding conversion
+* *annotation* contains UIMA wrapping and configuration classes/packages
+* *annotation.configuration* contains classes for describing the components used in a UIMA pipeline
+* *annotation.pipelines* contains wrappers for UIMA pipelines as a preparation for possible multi-threading

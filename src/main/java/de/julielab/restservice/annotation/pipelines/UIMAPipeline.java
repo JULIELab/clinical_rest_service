@@ -1,4 +1,4 @@
-package de.julielab.restservice.pipelines;
+package de.julielab.restservice.annotation.pipelines;
 
 import static org.apache.uima.fit.factory.JCasFactory.createJCas;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
