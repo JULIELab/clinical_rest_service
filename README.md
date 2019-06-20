@@ -12,9 +12,9 @@ UIMA based REST service for finding entities in German clinical documents.
 * REST endpoints provided by sparkjava framework
 * Currently uses embedded Jetty
 * Uses UIMA pipeline to apply NLP components
-* Only external dependency are models / config file, no need for database etc.
+* Only external dependency are model files, no need for database etc.
 
 ## Java packages
 * *restservice* package contains classes for starting/running REST server + *EncodingUtils* for encoding conversion
-* *annotation* package contains UIMA wrapping and configuration classes
+* *annotation* package contains UIMA wrapping and configuration classes; *AnalysisEngineConfiguration* could be extended to read a JSON (or whatever) file if different pipeline versions are to be deployed
 * *pipelines* package contains wrappers for UIMA pipelines as a preparation for possible multi-threading
