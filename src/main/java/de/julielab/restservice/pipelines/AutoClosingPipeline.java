@@ -10,10 +10,10 @@ public class AutoClosingPipeline implements AutoCloseable, IPipeline {
 	private final IPipeline pipeline;
 	private final ArrayBlockingQueue<IPipeline> pipelines;
 
-	public AutoClosingPipeline(ArrayBlockingQueue<IPipeline> pipelines)
+	public AutoClosingPipeline(final ArrayBlockingQueue<IPipeline> pipelines)
 			throws InterruptedException {
 		this.pipelines = pipelines;
-		this.pipeline = pipelines.take();
+		pipeline = pipelines.take();
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class AutoClosingPipeline implements AutoCloseable, IPipeline {
 	}
 
 	@Override
-	public List<Entity> process(String text, String fromEncoding)
+	public List<Entity> process(final String text, final String fromEncoding)
 			throws Exception {
 		return pipeline.process(text, fromEncoding);
 	}

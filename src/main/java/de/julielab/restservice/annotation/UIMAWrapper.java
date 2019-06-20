@@ -22,7 +22,7 @@ public class UIMAWrapper {
 	static AnalysisEngine[] createAnalysisEngines(
 			final AnalysisEngineConfiguration config)
 			throws ResourceInitializationException {
-		ArrayList<AnalysisEngine> aes = new ArrayList<>(4);
+		final ArrayList<AnalysisEngine> aes = new ArrayList<>(4);
 		aes.add(createEngine(SentenceAnnotator.class,
 				config.getSentenceSplitterConfig()));
 		aes.add(createEngine(TokenAnnotator.class,
@@ -42,7 +42,8 @@ public class UIMAWrapper {
 			throw new IllegalAccessException("Need at least 1 Thread");
 		final IPipeline[] pipelines = new IPipeline[numThreads];
 		for (int i = 0; i < numThreads; ++i)
-			pipelines[i] = new UIMAPipeline(analysisEngineConfiguration.getInternalEncoding(),
+			pipelines[i] = new UIMAPipeline(
+					analysisEngineConfiguration.getInternalEncoding(),
 					createAnalysisEngines(analysisEngineConfiguration));
 		return pipelines;
 	}
@@ -70,7 +71,8 @@ public class UIMAWrapper {
 			this.pipelines.put(p);
 	}
 
-	public List<Entity> annotate(final String text, final String fromEncoding) throws Exception {
+	public List<Entity> annotate(final String text, final String fromEncoding)
+			throws Exception {
 		try (AutoClosingPipeline pipeline = new AutoClosingPipeline(
 				pipelines)) {
 			return pipeline.process(text, fromEncoding);
