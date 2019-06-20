@@ -40,8 +40,7 @@ public class UIMAWrapperTest {
 
 	@Test
 	public void testAnnotateWithDummy() throws Exception {
-		final UIMAWrapper uimaWrapper = new UIMAWrapper(100,
-				new DummyPipeline());
+		final UIMAWrapper uimaWrapper = new UIMAWrapper(new DummyPipeline());
 		final List<Entity> actual = uimaWrapper.annotate("does not matter",
 				"utf-8");
 		assertEquals(1, actual.size());

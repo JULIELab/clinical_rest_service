@@ -50,20 +50,17 @@ public class UIMAWrapper {
 
 	private final int numThreads;
 
-	private final int timeout; //TODO: honor!
-
 	private final ArrayBlockingQueue<IPipeline> pipelines;
 
 	public UIMAWrapper(final int numThreads, final int timeout,
 			final AnalysisEngineConfiguration analysisEngineConfiguration)
 			throws Exception {
-		this(timeout, makePipelines(numThreads, analysisEngineConfiguration));
+		this(makePipelines(numThreads, analysisEngineConfiguration));
 	}
 
-	UIMAWrapper(final int timeout, final IPipeline... pipelines)
+	UIMAWrapper(final IPipeline... pipelines)
 			throws IllegalAccessException, InterruptedException {
 		numThreads = pipelines.length;
-		this.timeout = timeout;
 		if (numThreads < 1)
 			throw new IllegalAccessException("Need at least 1 Thread");
 		this.pipelines = new ArrayBlockingQueue<>(numThreads);
