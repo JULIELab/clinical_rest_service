@@ -43,7 +43,6 @@ public class UIMAWrapper {
 		final IPipeline[] pipelines = new IPipeline[numThreads];
 		for (int i = 0; i < numThreads; ++i)
 			pipelines[i] = new UIMAPipeline(
-					analysisEngineConfiguration.getInternalEncoding(),
 					createAnalysisEngines(analysisEngineConfiguration));
 		return pipelines;
 	}

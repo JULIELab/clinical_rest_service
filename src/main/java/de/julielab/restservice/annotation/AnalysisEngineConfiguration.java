@@ -22,23 +22,20 @@ public class AnalysisEngineConfiguration {
 		return config;
 	}
 
-	private AnalysisEngineConfiguration() {
-		//should use readConfiguration instead	
-	}
-
 	public boolean usePOS;
+
 	//Object[] sadly needed by UIMA API 🙄
 	public Object[] entityTaggerParams;
 	public Object[] posTaggerParams;
 	public Object[] sentenceSplitterParams;
 	public Object[] tokenizerParams;
 
-	public Object[] getEntityTaggerParams() {
-		return entityTaggerParams;
+	private AnalysisEngineConfiguration() {
+		//should use readConfiguration instead
 	}
 
-	public String getInternalEncoding() {
-		return "utf-8";
+	public Object[] getEntityTaggerParams() {
+		return entityTaggerParams;
 	}
 
 	public Object[] getPosTaggerParams() {

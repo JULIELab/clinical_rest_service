@@ -16,13 +16,11 @@ import de.julielab.restservice.annotation.Entity;
 
 public class UIMAPipeline implements IPipeline {
 
+	private static final String INTERNAL_ENCODING = "utf8";
 	private final JCas jcas;
-	private final String internalEncoding;
 	private final AnalysisEngine[] engines;
 
-	public UIMAPipeline(final String internalEncoding,
-			final AnalysisEngine[] engines) throws UIMAException {
-		this.internalEncoding = internalEncoding;
+	public UIMAPipeline(final AnalysisEngine[] engines) throws UIMAException {
 		this.engines = engines;
 		jcas = createJCas();
 	}
@@ -33,7 +31,7 @@ public class UIMAPipeline implements IPipeline {
 			throws Exception {
 		jcas.reset();
 		final String internalText = EncodingUtils.reEncode(text, fromEncoding,
-				internalEncoding);
+				INTERNAL_ENCODING);
 		jcas.setDocumentText(internalText);
 		runPipeline(jcas, engines);
 		final List<Entity> results = new ArrayList<>();
@@ -42,7 +40,7 @@ public class UIMAPipeline implements IPipeline {
 			results.add(new Entity(a.getSpecificType(), a.getBegin(),
 					a.getEnd(), a.getCoveredText()));
 		EncodingUtils.correctOffsetsInPlace(results, internalText,
-				internalEncoding, fromEncoding);
+				INTERNAL_ENCODING, fromEncoding);
 		return results;
 	}
 }
