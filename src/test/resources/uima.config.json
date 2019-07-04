@@ -1,6 +1,6 @@
 {
 	"usePOS": false,
-	"entityTaggerParams": [
+	"entityTaggerParams": [[
 		"EntityTypes",
 		[
 			"gene-protein=de.julielab.jcore.types.EntityMention",
@@ -13,7 +13,7 @@
 		null,
 		"ModelFilename",
 		"src/test/resources/models/jnet-pennbio.gz"
-	],
+	]],
 	"posTaggerParams": [
 		"tagset",
 		"de.julielab.jcore.types.STTSMedPOSTag",

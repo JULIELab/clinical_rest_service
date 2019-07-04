@@ -1,0 +1,47 @@
+{
+	"usePOS": false,
+	"entityTaggerParams": [
+		[
+			"EntityTypes",
+			[
+				"gene-protein=de.julielab.jcore.types.EntityMention",
+				"gene-generic=de.julielab.jcore.types.EntityMention",
+				"gene-rna=de.julielab.jcore.types.EntityMention"
+			],
+			"ExpandAbbreviations",
+			false,
+			"ConsistencyPreservation",
+			null,
+			"ModelFilename",
+			"src/test/resources/models/jnet-pennbio.gz"
+		],
+		[
+			"EntityTypes",
+			[
+				"gene-protein=de.julielab.jcore.types.EntityMention",
+				"gene-generic=de.julielab.jcore.types.EntityMention",
+				"gene-rna=de.julielab.jcore.types.EntityMention"
+			],
+			"ExpandAbbreviations",
+			false,
+			"ConsistencyPreservation",
+			null,
+			"ModelFilename",
+			"src/test/resources/models/jnet-pennbio.gz"
+		]
+	],
+	"posTaggerParams": [
+		"tagset",
+		"de.julielab.jcore.types.STTSMedPOSTag",
+		"ModelFilename",
+		"src/test/resources/models/jpos-framed.gz"
+	],
+	"sentenceSplitterParams": [
+		"ModelFilename",
+		"src/test/resources/models/jsbd-framed.gz"
+	],
+	"tokenizerParams": [
+		"ModelFilename",
+		"src/test/resources/models/jtbd-framed.gz"
+	]
+}

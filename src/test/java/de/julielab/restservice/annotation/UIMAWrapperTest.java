@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import de.julielab.restservice.annotation.pipelines.IPipeline;
+import de.julielab.restservice.annotation.pipelines.UIMAPipeline;
 
 public class UIMAWrapperTest {
 
@@ -31,6 +32,15 @@ public class UIMAWrapperTest {
 				.annotate("IL2 and igf oder mouse cancer", "utf-8");
 		assertEquals(1, entities.size());
 		assertEquals(new Entity("gene-protein", 0, 3, "IL2"), entities.get(0));
+	}
+
+	@Test
+	public void loadMultipleEntityAnnotators() throws Exception {
+		final UIMAWrapper wrapper = new UIMAWrapper(1, 1,
+				AnalysisEngineConfiguration.readConfiguration(
+						"src/test/resources/uima.config.2entities.json"));
+
+		assertEquals(4, ((UIMAPipeline) wrapper.pipelines.peek()).engines.length);
 	}
 
 	//	@Test

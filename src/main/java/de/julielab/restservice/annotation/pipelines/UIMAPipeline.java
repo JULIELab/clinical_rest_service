@@ -18,7 +18,7 @@ public class UIMAPipeline implements IPipeline {
 
 	private static final String INTERNAL_ENCODING = "utf8";
 	private final JCas jcas;
-	private final AnalysisEngine[] engines;
+	public final AnalysisEngine[] engines;
 
 	public UIMAPipeline(final AnalysisEngine[] engines) throws UIMAException {
 		this.engines = engines;

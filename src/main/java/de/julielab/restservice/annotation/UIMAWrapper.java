@@ -30,8 +30,8 @@ public class UIMAWrapper {
 		if (config.usePOS)
 			aes.add(createEngine(POSAnnotator.class,
 					config.getPosTaggerParams()));
-		aes.add(createEngine(EntityAnnotator.class,
-				config.getEntityTaggerParams()));
+		for(Object[] params : config.getEntityTaggerParams())
+			aes.add(createEngine(EntityAnnotator.class, params));
 		return aes.toArray(new AnalysisEngine[aes.size()]);
 	}
 
@@ -49,7 +49,7 @@ public class UIMAWrapper {
 
 	private final int numThreads;
 
-	private final ArrayBlockingQueue<IPipeline> pipelines;
+	final ArrayBlockingQueue<IPipeline> pipelines;
 
 	public UIMAWrapper(final int numThreads, final int timeout,
 			final AnalysisEngineConfiguration analysisEngineConfiguration)

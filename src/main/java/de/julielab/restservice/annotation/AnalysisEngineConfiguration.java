@@ -15,17 +15,18 @@ public class AnalysisEngineConfiguration {
 				Files.readString(Paths.get(configurationFile)),
 				AnalysisEngineConfiguration.class);
 		//fixes mismatch between expected types, avoids modification of tagger classes
-		for (int i = 0; i < config.entityTaggerParams.length; ++i)
-			if (config.entityTaggerParams[i] instanceof ArrayList)
-				config.entityTaggerParams[i] = ((ArrayList) config.entityTaggerParams[i])
-						.toArray(new String[0]);
+		for (Object[] params : config.entityTaggerParams)
+			for (int i = 0; i < params.length; ++i)
+				if (params[i] instanceof ArrayList)
+					params[i] = ((ArrayList) params[i])
+							.toArray(new String[0]);
 		return config;
 	}
 
 	public boolean usePOS;
 
 	//Object[] sadly needed by UIMA API 🙄
-	public Object[] entityTaggerParams;
+	public ArrayList<Object[]> entityTaggerParams;
 	public Object[] posTaggerParams;
 	public Object[] sentenceSplitterParams;
 	public Object[] tokenizerParams;
@@ -34,7 +35,7 @@ public class AnalysisEngineConfiguration {
 		//should use readConfiguration instead
 	}
 
-	public Object[] getEntityTaggerParams() {
+	public ArrayList<Object[]> getEntityTaggerParams() {
 		return entityTaggerParams;
 	}
 
